@@ -13,7 +13,7 @@ class ArchiveMigrationServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-archive-migration')
-            ->hasConfigFile('archive-migration')
+            ->hasConfigFile()
             ->hasCommands([
                 ArchiveMigrationCommand::class,
                 UnArchiveMigrationCommand::class,
