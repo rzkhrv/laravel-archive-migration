@@ -20,8 +20,11 @@ class UnArchiveMigrationCommand extends Command
             return 1;
         }
 
+        $archiveDirectory = config('archive-migration.archive_directory');
+        $archiveDirectoryPath = database_path('migrations/'.$archiveDirectory);
+
         $filesystem = app(Filesystem::class);
-        $files = $filesystem->allFiles(database_path('migrations/archive'));
+        $files = $filesystem->allFiles($archiveDirectoryPath);
 
         $directories = [];
         foreach ($files as $file) {

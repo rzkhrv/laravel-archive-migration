@@ -22,13 +22,16 @@ class ArchiveMigrationCommand extends Command
 
         $files = glob(database_path('migrations/*.php'));
 
+        $archiveDirectory = config('archive-migration.archive_directory');
+        $archiveDirectoryPath = database_path('migrations/'.$archiveDirectory);
+        $archiveDirectoryFormat = config('archive-migration.directory_format');
+
         foreach ($files as $file) {
             preg_match('/\d{4}_\d{2}_\d{2}/', $file, $m);
-
             $migrationDate = DateTimeImmutable::createFromFormat('Y_m_d', $m[0]);
 
-            $newPath = database_path('migrations/archive');
-            $newPath .= '/'.$migrationDate->format('Y');
+            $newPath = $archiveDirectoryPath;
+            $newPath .= '/'.$migrationDate->format($archiveDirectoryFormat);
             if (! is_dir($newPath)) {
                 mkdir($newPath, 0755, true);
             }
