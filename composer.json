@@ -43,11 +43,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ArchiveMigrationServiceProvider"
-            ],
-            "aliases": {
-                "ArchiveMigration": "ArchiveMigration"
-            }
+                "Rzkhrv\\ArchiveMigration\\ArchiveMigrationServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
