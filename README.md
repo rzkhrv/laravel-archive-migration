@@ -12,13 +12,13 @@ Simple package for split your migration files
 You can install the package via composer:
 
 ```bash
-composer require rzkhrv/laravel-archive-migration
+composer require rzkhrv/laravel-archive-migration --dev
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-archive-migration-config"
+php artisan vendor:publish --tag="archive-migration-config"
 ```
 
 ## Usage
