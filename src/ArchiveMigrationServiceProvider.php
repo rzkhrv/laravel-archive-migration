@@ -16,14 +16,14 @@ class ArchiveMigrationServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $archiveDirectory = config('archive-migration.archive_directory');
-            $archiveDirectoryPath = database_path('migrations/' . $archiveDirectory);
+            $archiveDirectoryPath = database_path('migrations/'.$archiveDirectory);
 
             $files = app(Filesystem::class)->allFiles($archiveDirectoryPath);
 
             $directories = [];
             foreach ($files as $file) {
                 $directory = $file->getPath();
-                if (!in_array($directory, $directories)) {
+                if (! in_array($directory, $directories)) {
                     $directories[] = $file->getPath();
                 }
             }
