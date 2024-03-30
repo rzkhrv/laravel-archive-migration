@@ -20,12 +20,6 @@ Publish the service provider:
 php artisan vendor:publish --tag="archive-migration-config"
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="archive-migration-config"
-```
-
 ## Usage
 
 ```bash

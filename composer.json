@@ -43,7 +43,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rzkhrv\\ArchiveMigration\\PackageServiceProvider"
+                "Rzkhrv\\ArchiveMigration\\PackageServiceProvider",
+                "Rzkhrv\\ArchiveMigration\\ArchiveMigrationServiceProvider"
             ]
         }
     },
