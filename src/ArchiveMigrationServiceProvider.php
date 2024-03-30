@@ -2,21 +2,33 @@
 
 namespace Rzkhrv\ArchiveMigration;
 
-use Rzkhrv\ArchiveMigration\Commands\ArchiveMigrationCommand;
-use Rzkhrv\ArchiveMigration\Commands\UnArchiveMigrationCommand;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\ServiceProvider;
 
-class ArchiveMigrationServiceProvider extends PackageServiceProvider
+class ArchiveMigrationServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function boot()
     {
-        $package
-            ->name('laravel-archive-migration')
-            ->hasConfigFile()
-            ->hasCommands([
-                ArchiveMigrationCommand::class,
-                UnArchiveMigrationCommand::class,
-            ]);
+        $this->loadArchivedMigrations();
+    }
+
+    protected function loadArchivedMigrations(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $archiveDirectory = config('archive-migration.archive_directory');
+            $archiveDirectoryPath = database_path('migrations/' . $archiveDirectory);
+
+            $files = app(Filesystem::class)->allFiles($archiveDirectoryPath);
+
+            $directories = [];
+            foreach ($files as $file) {
+                $directory = $file->getPath();
+                if (!in_array($directory, $directories)) {
+                    $directories[] = $file->getPath();
+                }
+            }
+
+            $this->loadMigrationsFrom($directories);
+        }
     }
 }
