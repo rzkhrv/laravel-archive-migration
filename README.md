@@ -15,7 +15,7 @@ You can install the package via composer:
 composer require rzkhrv/laravel-archive-migration --dev
 ```
 
-Publish the service provider:
+Publish config:
 ```bash
 php artisan vendor:publish --tag="archive-migration-config"
 ```
