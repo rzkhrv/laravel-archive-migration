@@ -38,12 +38,11 @@ class UnArchiveMigrationCommand extends Command
             }
         }
 
-        foreach ($directories as $directory) {
-            if (empty($filesystem->allFiles($directory))) {
-                rmdir($directory);
-            } else {
-                $this->warn('Directory is not empty: '.$directory);
-            }
+        $files = $filesystem->allFiles($archiveDirectoryPath);
+        if (empty($files)) {
+            $filesystem->deleteDirectory($archiveDirectoryPath);
+        } else {
+            $this->warn('Directory is not empty: '.$archiveDirectoryPath);
         }
 
         return self::SUCCESS;
