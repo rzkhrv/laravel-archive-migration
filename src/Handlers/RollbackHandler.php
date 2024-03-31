@@ -8,22 +8,15 @@ use Rzkhrv\LSM\Contracts\HandlerContract;
 
 class RollbackHandler implements HandlerContract
 {
-    /**
-     * @var Filesystem
-     */
     private Filesystem $filesystem;
 
     /**
      * Base migration path
-     *
-     * @var string
      */
     private string $migrationsPath;
 
     /**
      * It's a base archive directory name
-     *
-     * @var string
      */
     private string $archiveDirectory;
 
@@ -37,14 +30,12 @@ class RollbackHandler implements HandlerContract
     /**
      * This is a fully commented method, and you can build
      * own this method using my comments...
-     *
-     * @return array
      */
     public function handle(): array
     {
         //-- Build full path to the archive directory
         $archiveDirectory = config('lsm.archive_directory');
-        $archiveDirectoryPath = $this->migrationsPath . '/'. $this->archiveDirectory;
+        $archiveDirectoryPath = $this->migrationsPath.'/'.$this->archiveDirectory;
 
         //-- Get the migration files
         $files = $this->filesystem->allFiles($archiveDirectoryPath);
@@ -56,7 +47,7 @@ class RollbackHandler implements HandlerContract
         foreach ($files as $file) {
             //-- Here we assemble a new path for the migration file
             $fileName = $file->getBasename();
-            $newPath = $this->migrationsPath . '/'.$fileName;
+            $newPath = $this->migrationsPath.'/'.$fileName;
 
             try {
                 //-- I think it's a simple and universal method for move file
@@ -64,7 +55,7 @@ class RollbackHandler implements HandlerContract
                 //-- I'm not using @ here because I want the error message if there was one...
             } catch (\Throwable $e) {
                 //-- If there are any errors
-                $messages['error'][] = 'Failed to move file ' . $this->migrationsPath . 'Error: ' . $e->getMessage();
+                $messages['error'][] = 'Failed to move file '.$this->migrationsPath.'Error: '.$e->getMessage();
             }
 
             //-- Here I want to store the unique paths of the directories in which the migration files were located.

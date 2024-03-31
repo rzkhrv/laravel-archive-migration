@@ -23,20 +23,21 @@ class SplitCommand extends Command
         }
 
         //-- Get handler
-        $handler = !$this->option('rollback')
+        $handler = ! $this->option('rollback')
             ? config('lsm.handlers.split')
             : config('lsm.handlers.rollback');
 
         //-- Check the Handler implements HandlerContract
         $handler = app($handler);
-        if (!$handler instanceof HandlerContract) {
-            $this->error('Handler '.class_basename($handler).' should be implemented ' . HandlerContract::class);
+        if (! $handler instanceof HandlerContract) {
+            $this->error('Handler '.class_basename($handler).' should be implemented '.HandlerContract::class);
+
             return self::FAILURE;
         }
 
         //-- If you have errors, print they
         $messages = app($handler)->handle();
-        if (!empty($messages)) {
+        if (! empty($messages)) {
             foreach ($messages as $type => $message) {
                 $this->{$type}($message);
             }
