@@ -8,22 +8,15 @@ use Rzkhrv\LSM\Contracts\HandlerContract;
 
 class SplitHandler implements HandlerContract
 {
-    /**
-     * @var Filesystem
-     */
     private Filesystem $filesystem;
 
     /**
      * Base migration path
-     *
-     * @var string
      */
     private string $migrationsPath;
 
     /**
      * It's a base archive directory name
-     *
-     * @var string
      */
     private string $archiveDirectory;
 
@@ -42,7 +35,7 @@ class SplitHandler implements HandlerContract
         $archiveDirectoryFormat = config('archive-migration.directory_format');
 
         //-- Here we get the migration files
-        $files = glob(database_path($this->migrationsPath .'/*.php'));
+        $files = glob(database_path($this->migrationsPath.'/*.php'));
 
         //-- Then we need to move them to a new path
         foreach ($files as $file) {

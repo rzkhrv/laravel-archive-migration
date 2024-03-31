@@ -24,7 +24,7 @@ class ArchiveMigrationServiceProvider extends ServiceProvider
                 $directories = [];
                 foreach ($files as $file) {
                     $directory = $file->getPath();
-                    if (!in_array($directory, $directories)) {
+                    if (! in_array($directory, $directories)) {
                         $directories[] = $file->getPath();
                     }
                 }
