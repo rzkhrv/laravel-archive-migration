@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Rzkhrv\\ArchiveMigration\\": "src/"
+            "Rzkhrv\\LSM\\": "src/"
         }
     },
     "scripts": {
@@ -43,8 +43,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rzkhrv\\ArchiveMigration\\PackageServiceProvider",
-                "Rzkhrv\\ArchiveMigration\\ArchiveMigrationServiceProvider"
+                "Rzkhrv\\LSM\\PackageServiceProvider",
+                "Rzkhrv\\LSM\\LSMServiceProvider"
             ]
         }
     },

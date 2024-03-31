@@ -2,7 +2,7 @@
 
 namespace Rzkhrv\ArchiveMigration;
 
-use Rzkhrv\ArchiveMigration\Commands\ArchiveMigrationCommand;
+use Rzkhrv\ArchiveMigration\Commands\SplitCommand;
 use Rzkhrv\ArchiveMigration\Commands\UnArchiveMigrationCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider as ServiceProvider;
@@ -15,7 +15,7 @@ class PackageServiceProvider extends ServiceProvider
             ->name('laravel-archive-migration')
             ->hasConfigFile()
             ->hasCommands([
-                ArchiveMigrationCommand::class,
+                SplitCommand::class,
                 UnArchiveMigrationCommand::class,
             ]);
     }
