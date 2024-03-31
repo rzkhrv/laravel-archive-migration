@@ -18,17 +18,19 @@ class ArchiveMigrationServiceProvider extends ServiceProvider
             $archiveDirectory = config('archive-migration.archive_directory');
             $archiveDirectoryPath = database_path('migrations/'.$archiveDirectory);
 
-            $files = app(Filesystem::class)->allFiles($archiveDirectoryPath);
+            if (is_dir($archiveDirectoryPath)) {
+                $files = app(Filesystem::class)->allFiles($archiveDirectoryPath);
 
-            $directories = [];
-            foreach ($files as $file) {
-                $directory = $file->getPath();
-                if (! in_array($directory, $directories)) {
-                    $directories[] = $file->getPath();
+                $directories = [];
+                foreach ($files as $file) {
+                    $directory = $file->getPath();
+                    if (! in_array($directory, $directories)) {
+                        $directories[] = $file->getPath();
+                    }
                 }
-            }
 
-            $this->loadMigrationsFrom($directories);
+                $this->loadMigrationsFrom($directories);
+            }
         }
     }
 }
