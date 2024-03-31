@@ -14,36 +14,4 @@
 composer require rzkhrv/laravel-archive-migration --dev
 ```
 
-> Хорошей практикой будет считаться использование только в dev окружении.
-
-Опубликуйте конфигурацию:
-```bash
-php artisan vendor:publish --tag="archive-migration-config"
-```
-
-Она содержит:
-```php
-'directory' => env('LAM_ARCHIVE_DIRECTORY', 'archive'),
-'directory_format' => env('LAM_DIRECTORY_FORMAT', 'Y/m'),
-```
-
-## Usage
-
-```bash
-php artisan migration:split
-```
-Эта команда переместит ваши файлы миграций в поддиректории, например:
-```
-database/migrations/archive/2014/10/2014_10_12_000000_create_users_table.php
-database/migrations/archive/2014/10/2014_10_12_100000_create_password_reset_tokens_table.php
-database/migrations/archive/2019/08/2019_08_19_000000_create_failed_jobs_table.php
-```
-
-Эта команда вернет файлы миграций в базовую директорию:
-```bash
-php artisan migration:split --rollback
-```
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+> WIP
